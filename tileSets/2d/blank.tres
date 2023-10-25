@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="tile" load_steps=3 format=3 uid="uid://csfywibo3m378"]
+
+[ext_resource type="Script" path="res://tile.gd" id="1_w6t8n"]
+[ext_resource type="PackedScene" uid="uid://cb5g6qbk3630k" path="res://tiles/2d/blankScene.tscn" id="4_4ax81"]
+
+[resource]
+script = ExtResource("1_w6t8n")
+tileScene = ExtResource("4_4ax81")
+upperSiblings = Array[ExtResource("1_w6t8n")]([null, null])
+lowerSiblings = Array[ExtResource("1_w6t8n")]([null, null])
+rightSiblings = Array[ExtResource("1_w6t8n")]([null, null])
+leftSiblings = Array[ExtResource("1_w6t8n")]([null, null])
