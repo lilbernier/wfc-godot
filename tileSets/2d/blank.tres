@@ -5,8 +5,11 @@
 
 [resource]
 script = ExtResource("1_w6t8n")
+title = "blank"
 tileScene = ExtResource("4_4ax81")
-upperSiblings = Array[ExtResource("1_w6t8n")]([null, null])
-lowerSiblings = Array[ExtResource("1_w6t8n")]([null, null])
-rightSiblings = Array[ExtResource("1_w6t8n")]([null, null])
-leftSiblings = Array[ExtResource("1_w6t8n")]([null, null])
+filePath = "res://tileSets/2d/"
+fileType = ".tres"
+upperSiblingPaths = Array[String](["blank", "up"])
+lowerSiblingPaths = Array[String](["down", "blank"])
+rightSiblingPaths = Array[String](["right", "blank"])
+leftSiblingPaths = Array[String](["blank", "left"])

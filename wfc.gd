@@ -12,7 +12,7 @@ var grid = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	generateGrid()
-	
+	tileSet[0].getAllSiblings()
 
 
 func entropy():
