@@ -10,11 +10,13 @@ var cellTile = null
 
 var position = null
 
+func collapse():
+	collapseCell(options[randi_range(0,options.size()-1)])
+
 
 func collapseCell(_tile):
 	cellTile = _tile
 	collapsed = true
-	
 	var newScene = cellTile.tileScene.instantiate()
 	newScene.position = position
 	add_child(newScene)
