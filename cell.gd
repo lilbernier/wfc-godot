@@ -10,6 +10,7 @@ var cellTile = null
 
 var position = null
 
+
 func collapse():
 	collapseCell(options[randi_range(0,options.size()-1)])
 
@@ -21,11 +22,17 @@ func collapseCell(_tile):
 	newScene.position = position
 	add_child(newScene)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
+func getTile():
+	return cellTile
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func getOptions():
+	return options;
+
+func updatePossibleOptions(_arrOptions):
+	var newOptions = []
+	for opt in _arrOptions:
+		if(newOptions.has(opt)): continue
+		newOptions.push_back(opt)
+	
+	options = newOptions

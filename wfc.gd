@@ -15,7 +15,13 @@ func _ready():
 		t.getAllSiblings()
 	generateGrid()
 	
+	entropy()
+
 	
+	
+func entropy():
+	
+	#Sorted Grid
 	var gridCopy = grid.duplicate()
 	gridCopy.sort_custom(func(a, b): return a.options.size() < b.options.size())
 	
@@ -27,39 +33,54 @@ func _ready():
 			break
 	
 	
-	gridCopy = gridCopy.slice(0, stopIndex)
+	if(stopIndex > 0): gridCopy = gridCopy.slice(0, stopIndex)
 	
-	var randIndex = randi_range(0, gridCopy.size()-1)#randi() % gridCopy.size()
-	print(grid[randIndex].options[0].title)
-	grid[randIndex].collapse()
+	var randIndex = randi_range(0, gridCopy.size()-1)
+	
+	var cellToCollapse = gridCopy[randIndex]
+	print(cellToCollapse.position)
+	collapseIndex(grid.find(cellToCollapse))
+	
 #	for t in gridCopy:
 #		print(t.options.size())
 	
+	
+#	var index = -1
+#	for i in grid:
+#		index += 1
+#		if(grid[index].collapsed == true):
+#			continue
+#		else:
+#			print(index)
+#			#if(((num + GridWidth) > grid.size() - 1) || grid[num + GridWidth].isSolid()):
+#			#goodToMoveDown = false
 
-	
-	
-func entropy():
-	
-	#Sorted Grid
-	#if(fullRows.size() > 1): fullRows.sort_custom(func(a, b): return a[0] > b[0])
-	
-	
-	
-	var index = -1
-	for i in grid:
-		index += 1
-		if(grid[i].collapsed == true):
-			continue
-		else:
-			print(index)
-			#if(((num + GridWidth) > grid.size() - 1) || grid[num + GridWidth].isSolid()):
-			#goodToMoveDown = false
 
+
+func collapseIndex(_index):
+	var collapsedCell = grid[_index]
+	collapsedCell.collapse()
+	var cellTile = collapsedCell.getTile()
+	
+	
+	#Eh this is like simple checks to see where we are on the border to update the surrounding options
+	if(_index < dimensions):
+		print('top row')
+		
+	if(_index > (dimensions * dimensions) - dimensions):
+		print('bottom row')
+	
+	if(_index % (dimensions) == 0):
+		print('left side?')
+		
+	if(((_index + 1) % dimensions) == 0):
+		print('right side?')
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
 
 
 #Create a Square for the grid using un.gd
@@ -74,11 +95,12 @@ func createCell(_position):
 	return node
 	
 func generateGrid():
+	var index = -1
 	#generate a cell for every dimension
 	for w in dimensions:
 		for h in dimensions:
-			var x = w * spacing
-			var y = h * spacing
+			index += 1
+			var x = h * spacing
+			var y = w * spacing
 			var node = createCell(Vector2(x, y))
 			grid.push_back(node)
-	
