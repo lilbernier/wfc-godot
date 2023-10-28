@@ -21,7 +21,6 @@ func collapse():
 		return
 	collapseCell(options[randi_range(0,options.size()-1)])
 
-
 func collapseCell(_tile):
 	cellTile = _tile
 	var newScene = cellTile.tileScene.instantiate()
@@ -29,7 +28,6 @@ func collapseCell(_tile):
 	else: newScene.position = position
 	
 	add_child(newScene)
-
 
 func getTile():
 	return cellTile
@@ -56,7 +54,7 @@ func eliminateOptions(_arrOptions):
 
 	for opt in optionsToDelete:
 			options.erase(opt)
-	
+
 func printOptions():
 	var currentOptionsStr =''
 	for opt in options:

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="tile" load_steps=3 format=3 uid="uid://ekq7l1mk87ud"]
+
+[ext_resource type="Script" path="res://scripts/wfc/tile.gd" id="1_mkae8"]
+[ext_resource type="PackedScene" uid="uid://bjciokvjfoafd" path="res://scenes/3d_flat/tile_scenes/upScene.tscn" id="2_kcqgp"]
+
+[resource]
+script = ExtResource("1_mkae8")
+title = "up"
+tileScene = ExtResource("2_kcqgp")
+filePath = "res://scenes/3d_flat/tile_resources/complex/"
+fileType = ".tres"
+upperSiblingPaths = Array[String](["down", "left", "right", "empty"])
+lowerSiblingPaths = Array[String](["blank", "down"])
+rightSiblingPaths = Array[String](["down", "left", "up", "empty"])
+leftSiblingPaths = Array[String](["right", "down", "up", "empty"])
