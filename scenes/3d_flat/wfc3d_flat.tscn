@@ -1,0 +1,34 @@
+[gd_scene load_steps=11 format=3 uid="uid://dd5encr8tqwyl"]
+
+[ext_resource type="Script" path="res://scripts/wfc/wfc.gd" id="1_cu1iq"]
+[ext_resource type="Resource" uid="uid://dhxnrpav7boru" path="res://scenes/3d_flat/tile_resources/blank.tres" id="2_8524v"]
+[ext_resource type="Resource" uid="uid://bjrhymk81hvx4" path="res://scenes/3d_flat/tile_resources/down.tres" id="3_ht0ho"]
+[ext_resource type="Resource" uid="uid://dvy6dx7crro4y" path="res://scenes/3d_flat/tile_resources/left.tres" id="4_l2ec4"]
+[ext_resource type="Resource" uid="uid://dr4heqypanw8b" path="res://scenes/3d_flat/tile_resources/right.tres" id="5_gja7t"]
+[ext_resource type="Resource" uid="uid://cyhjlmxur0hv" path="res://scenes/3d_flat/tile_resources/up.tres" id="6_nv4o3"]
+[ext_resource type="Script" path="res://scripts/FreelookCamera.gd" id="7_nji5f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uxbt5"]
+
+[sub_resource type="Sky" id="Sky_3vlay"]
+sky_material = SubResource("ProceduralSkyMaterial_uxbt5")
+
+[sub_resource type="Environment" id="Environment_k4hqy"]
+background_mode = 2
+background_energy_multiplier = 2.09
+sky = SubResource("Sky_3vlay")
+
+[node name="wfc" type="Node"]
+script = ExtResource("1_cu1iq")
+tileSet = Array[Resource("res://scripts/wfc/tile.gd")]([ExtResource("2_8524v"), ExtResource("3_ht0ho"), ExtResource("4_l2ec4"), ExtResource("5_gja7t"), ExtResource("6_nv4o3")])
+dimensions = 20
+spacing = 2
+generationSpeed = 0.01
+is3D = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.624657, 0.780899, 0, -0.780899, 0.624657, 16.9043, 36.5073, 44.4984)
+script = ExtResource("7_nji5f")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k4hqy")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjuprw7pb8vp1"]
+
+[ext_resource type="ArrayMesh" uid="uid://b1som0usfbxko" path="res://scenes/3d_flat/src/split.obj" id="1_w6ohm"]
+
+[node name="Down" type="Node3D"]
+
+[node name="Split" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_w6ohm")

@@ -12,6 +12,7 @@ var cellTile = null
 
 var position = null
 
+var is3D = false
 
 func collapse():
 	collapsed = true
@@ -24,7 +25,9 @@ func collapse():
 func collapseCell(_tile):
 	cellTile = _tile
 	var newScene = cellTile.tileScene.instantiate()
-	newScene.position = position
+	if(is3D): newScene.position = Vector3(position.x, 0, position.y)
+	else: newScene.position = position
+	
 	add_child(newScene)
 
 

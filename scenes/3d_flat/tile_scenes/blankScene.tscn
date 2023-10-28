@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://partrc4whqjx"]
+
+[ext_resource type="ArrayMesh" uid="uid://ch5d4baxp02ph" path="res://scenes/3d_flat/src/blank.obj" id="1_tbxve"]
+
+[node name="Blank" type="Node3D"]
+
+[node name="Blank" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_tbxve")

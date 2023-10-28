@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name wfc
 
 @export var tileSet: Array[tile] = []
@@ -8,6 +8,8 @@ class_name wfc
 var grid = []
 
 @export var generationSpeed: float = 0;
+
+@export var is3D: bool = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -103,6 +105,8 @@ func createCell(_position):
 	node.options = tileSet.duplicate()
 	node.totalOptions = tileSet.duplicate()
 	node.collapsed = false
+	node.is3D = is3D
+	
 	#node.collapseCell(tileSet[0])
 	return node
 	

@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://0xqar27lhpdh" path="res://tileSets/2d/right.tres" id="5_6yvtn"]
 [ext_resource type="Resource" uid="uid://xji2e0rtxkh8" path="res://tileSets/2d/up.tres" id="6_12as0"]
 
-[node name="wfc" type="Node2D"]
+[node name="wfc" type="Node"]
 script = ExtResource("1_fawom")
 tileSet = Array[Resource("res://scripts/wfc/tile.gd")]([ExtResource("2_0cstw"), ExtResource("3_huy6x"), ExtResource("4_6h5a0"), ExtResource("5_6yvtn"), ExtResource("6_12as0")])
 dimensions = 20

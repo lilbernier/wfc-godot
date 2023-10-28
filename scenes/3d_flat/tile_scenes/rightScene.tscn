@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcixmhshhnw42"]
+
+[ext_resource type="ArrayMesh" uid="uid://b1som0usfbxko" path="res://scenes/3d_flat/src/split.obj" id="1_momwj"]
+
+[node name="Right" type="Node3D"]
+
+[node name="Split" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("1_momwj")
