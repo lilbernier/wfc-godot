@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="tile" load_steps=3 format=3 uid="uid://csfywibo3m378"]
 
-[ext_resource type="Script" path="res://tile.gd" id="1_w6t8n"]
+[ext_resource type="Script" path="res://scripts/wfc/tile.gd" id="1_w6t8n"]
 [ext_resource type="PackedScene" uid="uid://cb5g6qbk3630k" path="res://tiles/2d/blankScene.tscn" id="4_4ax81"]
 
 [resource]

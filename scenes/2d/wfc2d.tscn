@@ -1,0 +1,14 @@
+[gd_scene load_steps=7 format=3 uid="uid://d18ghjof7xgju"]
+
+[ext_resource type="Script" path="res://scripts/wfc/wfc.gd" id="1_fawom"]
+[ext_resource type="Resource" uid="uid://csfywibo3m378" path="res://tileSets/2d/blank.tres" id="2_0cstw"]
+[ext_resource type="Resource" uid="uid://6nf2l8maqcwn" path="res://tileSets/2d/down.tres" id="3_huy6x"]
+[ext_resource type="Resource" uid="uid://ckgktls1v0jl5" path="res://tileSets/2d/left.tres" id="4_6h5a0"]
+[ext_resource type="Resource" uid="uid://0xqar27lhpdh" path="res://tileSets/2d/right.tres" id="5_6yvtn"]
+[ext_resource type="Resource" uid="uid://xji2e0rtxkh8" path="res://tileSets/2d/up.tres" id="6_12as0"]
+
+[node name="wfc" type="Node2D"]
+script = ExtResource("1_fawom")
+tileSet = Array[Resource("res://scripts/wfc/tile.gd")]([ExtResource("2_0cstw"), ExtResource("3_huy6x"), ExtResource("4_6h5a0"), ExtResource("5_6yvtn"), ExtResource("6_12as0")])
+dimensions = 20
+generationSpeed = 0.01

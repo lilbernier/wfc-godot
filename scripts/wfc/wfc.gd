@@ -92,14 +92,12 @@ func collapseIndex(_index):
 func _process(delta):
 #	#Debugger
 #	if(Input.is_action_just_pressed("ui_down")):
-#		entropy()
+#		ent	ropy()
 	pass
 
 #Create a Square for the grid using un.gd
 func createCell(_position):
 	var node = cell.new()
-	#node.texture = squareTexture
-	node.set_script(load("res://cell.gd"))
 	add_child(node)
 	node.position = _position
 	node.options = tileSet.duplicate()
