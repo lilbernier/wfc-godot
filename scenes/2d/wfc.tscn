@@ -10,3 +10,4 @@
 [node name="wfc" type="Node2D"]
 script = ExtResource("1_fiskc")
 tileSet = Array[Resource("res://tile.gd")]([ExtResource("2_j25u8"), ExtResource("3_u4ovp"), ExtResource("4_ti5e1"), ExtResource("5_8ubb8"), ExtResource("6_mlw6c")])
+dimensions = 10

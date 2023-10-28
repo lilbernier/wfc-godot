@@ -1,9 +1,11 @@
 extends Node
 class_name cell
 
+var totalOptions = []
 var options = []
-var collapsed = false
+var optionsItCantBe = []
 
+var collapsed = false
 
 var child = null
 var cellTile = null
@@ -12,12 +14,15 @@ var position = null
 
 
 func collapse():
+	collapsed = true
+	if(options.size() == 0): 
+		collapseCell(totalOptions[0])
+		return
 	collapseCell(options[randi_range(0,options.size()-1)])
 
 
 func collapseCell(_tile):
 	cellTile = _tile
-	collapsed = true
 	var newScene = cellTile.tileScene.instantiate()
 	newScene.position = position
 	add_child(newScene)
@@ -29,10 +34,35 @@ func getTile():
 func getOptions():
 	return options;
 
-func updatePossibleOptions(_arrOptions):
+func eliminateOptions(_arrOptions):
 	var newOptions = []
-	for opt in _arrOptions:
-		if(newOptions.has(opt)): continue
-		newOptions.push_back(opt)
+	#loop through total options
+	for opt in totalOptions:
+		#if our new list of options have this current option then add it.
+		if(!_arrOptions.has(opt)):
+			if(!optionsItCantBe.has(opt)):				
+				optionsItCantBe.push_back(opt)
+				
+	var optionsToDelete = []
 	
-	options = newOptions
+	for opt in options:
+		#if our new list of options have this current option then add it.
+		if(optionsItCantBe.has(opt)):
+			print(opt.title)
+			optionsToDelete.push_back(opt)
+
+	for opt in optionsToDelete:
+			options.erase(opt)
+			
+	print('opts ' + str(options.size()))
+#	for opt in options:
+#		print(opt.title)
+
+	
+func printOptions():
+	var currentOptionsStr =''
+	for opt in options:
+		currentOptionsStr += opt.title
+		
+	print(currentOptionsStr)
+	pass

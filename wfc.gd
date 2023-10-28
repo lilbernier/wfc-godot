@@ -16,14 +16,27 @@ func _ready():
 	generateGrid()
 	
 	entropy()
-
+#	grid[5].eliminateOptions([tileSet[2], tileSet[0]])
 	
 	
 func entropy():
 	
+	
 	#Sorted Grid
 	var gridCopy = grid.duplicate()
+	
+	var cellsToDelete = []
+	for g in gridCopy:
+		if(g.collapsed || g.cellTile != null):
+			print('found a collapsed?')
+			cellsToDelete.push_back(g)
+			
 	gridCopy.sort_custom(func(a, b): return a.options.size() < b.options.size())
+	
+
+	
+	for g in cellsToDelete:
+		gridCopy.erase(g)
 	
 	var len = gridCopy[0].options.size()
 	var stopIndex = -1
@@ -32,13 +45,13 @@ func entropy():
 		if(t.options.size() > len):
 			break
 	
+
 	
 	if(stopIndex > 0): gridCopy = gridCopy.slice(0, stopIndex)
 	
 	var randIndex = randi_range(0, gridCopy.size()-1)
 	
 	var cellToCollapse = gridCopy[randIndex]
-	print(cellToCollapse.position)
 	collapseIndex(grid.find(cellToCollapse))
 	
 #	for t in gridCopy:
@@ -52,8 +65,8 @@ func entropy():
 #			continue
 #		else:
 #			print(index)
-#			#if(((num + GridWidth) > grid.size() - 1) || grid[num + GridWidth].isSolid()):
-#			#goodToMoveDown = false
+			#if(((num + GridWidth) > grid.size() - 1) || grid[num + GridWidth].isSolid()):
+			#goodToMoveDown = false
 
 
 
@@ -61,26 +74,41 @@ func collapseIndex(_index):
 	var collapsedCell = grid[_index]
 	collapsedCell.collapse()
 	var cellTile = collapsedCell.getTile()
-	
-	
-	#Eh this is like simple checks to see where we are on the border to update the surrounding options
-	if(_index < dimensions):
-		print('top row')
-		
-	if(_index > (dimensions * dimensions) - dimensions):
-		print('bottom row')
-	
-	if(_index % (dimensions) == 0):
-		print('left side?')
-		
-	if(((_index + 1) % dimensions) == 0):
-		print('right side?')
-	
-	
 
+	var topIndex = _index - dimensions;
+	var bottomIndex = _index + dimensions;
+	var rightIndex = _index + 1;
+	var leftIndex = _index - 1;
+	
+	print('current index ' + str(_index))
+	print('top index ' + str(topIndex))
+	print('bottom index ' + str(bottomIndex))
+	print('left index ' + str(leftIndex))
+	print('right index ' + str(rightIndex))
+	
+	
+	if(topIndex > 0):
+		grid[topIndex].eliminateOptions(collapsedCell.getTile().upperSiblings)
+	
+	if(bottomIndex < grid.size()):
+		grid[bottomIndex].eliminateOptions(collapsedCell.getTile().lowerSiblings)
+		
+	if((rightIndex % dimensions) != 0):
+		grid[rightIndex].eliminateOptions(collapsedCell.getTile().rightSiblings)
+		grid[rightIndex].printOptions()
+	
+	if((leftIndex % dimensions + 1) != 0):
+		grid[leftIndex].eliminateOptions(collapsedCell.getTile().leftSiblings)
+
+
+#	for g in grid:
+#		print(str(g.options.size()))
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(Input.is_action_just_pressed("ui_down")):
+		entropy()
+		
 
 
 #Create a Square for the grid using un.gd
@@ -90,7 +118,9 @@ func createCell(_position):
 	node.set_script(load("res://cell.gd"))
 	add_child(node)
 	node.position = _position
-	node.options = tileSet
+	node.options = tileSet.duplicate()
+	node.totalOptions = tileSet.duplicate()
+	node.collapsed = false
 	#node.collapseCell(tileSet[0])
 	return node
 	
