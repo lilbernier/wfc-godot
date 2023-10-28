@@ -7,36 +7,32 @@ class_name wfc
 
 var grid = []
 
-
+@export var generationSpeed: float = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for t in tileSet:
 		t.getAllSiblings()
 	generateGrid()
-	
 	entropy()
-#	grid[5].eliminateOptions([tileSet[2], tileSet[0]])
-	
 	
 func entropy():
-	
-	
 	#Sorted Grid
 	var gridCopy = grid.duplicate()
 	
 	var cellsToDelete = []
 	for g in gridCopy:
 		if(g.collapsed || g.cellTile != null):
-			print('found a collapsed?')
 			cellsToDelete.push_back(g)
 			
 	gridCopy.sort_custom(func(a, b): return a.options.size() < b.options.size())
 	
-
-	
 	for g in cellsToDelete:
 		gridCopy.erase(g)
+	
+	if(gridCopy.size() == 0):
+		print('Wave Function Collapse Completed')
+		return
 	
 	var len = gridCopy[0].options.size()
 	var stopIndex = -1
@@ -45,8 +41,6 @@ func entropy():
 		if(t.options.size() > len):
 			break
 	
-
-	
 	if(stopIndex > 0): gridCopy = gridCopy.slice(0, stopIndex)
 	
 	var randIndex = randi_range(0, gridCopy.size()-1)
@@ -54,62 +48,52 @@ func entropy():
 	var cellToCollapse = gridCopy[randIndex]
 	collapseIndex(grid.find(cellToCollapse))
 	
-#	for t in gridCopy:
-#		print(t.options.size())
-	
-	
-#	var index = -1
-#	for i in grid:
-#		index += 1
-#		if(grid[index].collapsed == true):
-#			continue
-#		else:
-#			print(index)
-			#if(((num + GridWidth) > grid.size() - 1) || grid[num + GridWidth].isSolid()):
-			#goodToMoveDown = false
-
-
+	if(generationSpeed > 0): await get_tree().create_timer(generationSpeed).timeout
+	entropy()
 
 func collapseIndex(_index):
 	var collapsedCell = grid[_index]
 	collapsedCell.collapse()
 	var cellTile = collapsedCell.getTile()
 
+
+
+	#Eliminate Options of siblings based off of our position of siblings.
+	#To Make this 3rd Dimensional we will need to include 2 more sibling arrays from above/below
 	var topIndex = _index - dimensions;
 	var bottomIndex = _index + dimensions;
 	var rightIndex = _index + 1;
 	var leftIndex = _index - 1;
 	
-	print('current index ' + str(_index))
-	print('top index ' + str(topIndex))
-	print('bottom index ' + str(bottomIndex))
-	print('left index ' + str(leftIndex))
-	print('right index ' + str(rightIndex))
+#	#Debugger	
+#	print('current index ' + str(_index))
+#	print('top index ' + str(topIndex))
+#	print('bottom index ' + str(bottomIndex))
+#	print('left index ' + str(leftIndex))
+#	print('right index ' + str(rightIndex))
 	
-	
-	if(topIndex > 0):
+	if(topIndex >= 0):
 		grid[topIndex].eliminateOptions(collapsedCell.getTile().upperSiblings)
+		#grid[topIndex].printOptions()
 	
 	if(bottomIndex < grid.size()):
 		grid[bottomIndex].eliminateOptions(collapsedCell.getTile().lowerSiblings)
+		#grid[bottomIndex].printOptions()
 		
 	if((rightIndex % dimensions) != 0):
 		grid[rightIndex].eliminateOptions(collapsedCell.getTile().rightSiblings)
-		grid[rightIndex].printOptions()
+		#grid[rightIndex].printOptions()
 	
 	if((leftIndex % dimensions + 1) != 0):
 		grid[leftIndex].eliminateOptions(collapsedCell.getTile().leftSiblings)
-
-
-#	for g in grid:
-#		print(str(g.options.size()))
+		#grid[leftIndex].printOptions()
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(Input.is_action_just_pressed("ui_down")):
-		entropy()
-		
-
+#	#Debugger
+#	if(Input.is_action_just_pressed("ui_down")):
+#		entropy()
+	pass
 
 #Create a Square for the grid using un.gd
 func createCell(_position):

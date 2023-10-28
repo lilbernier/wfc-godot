@@ -11,5 +11,5 @@ filePath = "res://tileSets/2d/"
 fileType = ".tres"
 upperSiblingPaths = Array[String](["down", "left", "right"])
 lowerSiblingPaths = Array[String](["up", "left", "right"])
-rightSiblingPaths = Array[String](["down", "left", "right"])
+rightSiblingPaths = Array[String](["down", "left", "up"])
 leftSiblingPaths = Array[String](["blank", "left"])

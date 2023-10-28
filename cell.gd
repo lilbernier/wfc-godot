@@ -42,22 +42,17 @@ func eliminateOptions(_arrOptions):
 		if(!_arrOptions.has(opt)):
 			if(!optionsItCantBe.has(opt)):				
 				optionsItCantBe.push_back(opt)
-				
+		
+	#All This probably doesn't need to be here
+	#Could probably clean this up further
+	#TODO: Clean Up Further		
 	var optionsToDelete = []
-	
 	for opt in options:
-		#if our new list of options have this current option then add it.
 		if(optionsItCantBe.has(opt)):
-			print(opt.title)
 			optionsToDelete.push_back(opt)
 
 	for opt in optionsToDelete:
 			options.erase(opt)
-			
-	print('opts ' + str(options.size()))
-#	for opt in options:
-#		print(opt.title)
-
 	
 func printOptions():
 	var currentOptionsStr =''
